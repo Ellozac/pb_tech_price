@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import sqlite3
-connection = sqlite3.connect("./pbtech_pricescraper/database.sqlite3")
+connection = sqlite3.connect("database.sqlite3")
 cur = connection.cursor()
 userInput = ""
 newProd = ""
