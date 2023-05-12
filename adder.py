@@ -27,7 +27,10 @@ if userInput == "1":
     newProd = product(input("What would you like to call this product?\n>"), input("Url for product?\n> "))
     response = requests.get(newProd.url)
     soup = BeautifulSoup(response.content, "html.parser")
-    pp_span = soup.find("span", {"class": "dollars"})
-
-    print(pp_span)
-    
+    pp_span = soup.find("span", {"class": "explist_dollars"}).text
+    pp_span = pp_span[1:]
+    pp_span = int(pp_span)
+    pp_span +=  pp_span * 0.15
+    pp_span = round(pp_span)
+    cur.execute("INSERT INTO wishlist(name, url, cost) VALUES(?,?,?);",(newProd.name, newProd.url,pp_span))
+    connection.commit()
