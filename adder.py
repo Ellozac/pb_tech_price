@@ -89,6 +89,8 @@ class addGUI:
         mainGUI()
     def appendToDB(self):
         newProd = product(self.item_name.get("1.0", tk.END), self.item_url.get("1.0", tk.END))
+        if not newProd.url.startswith('http://') and not newProd.url.startswith('https://'):
+            newProd.url = 'https://' + newProd.url
         response = requests.get(newProd.url)
         soup = BeautifulSoup(response.content, "html.parser")
         pp_span = soup.find("span", {"class": "explist_dollars"}).text
