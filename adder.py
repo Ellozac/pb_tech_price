@@ -126,14 +126,26 @@ class viewGUI:
         for row in rows:
             print(row)
             self.tree.insert("",tk.END, values=row)
-           
+            
+        self.removeButton = tk.Button(self.root, text="Remove", anchor=tk.E, command=self.remove)     
+        self.removeLabel = tk.Label(self.root, font=("Arial", 18), anchor=tk.W, text="Enter ID then press Remove")
+        self.removeText = tk.Text(self.root, height=1, width=1)
+        
+        self.removeLabel.pack(padx=10, pady=10)
+        self.removeText.pack(padx=5, pady=5)
+        self.removeButton.pack(padx=5, pady=5)
+        
         self.backButton = tk.Button(self.root, text="Back To Menu", command=self.backToMenu)
-        self.backButton.pack(pady=10)
+        self.backButton.pack(pady=30)
         self.root.mainloop()
     def backToMenu(self):
         self.root.destroy()
         mainGUI()
-          
+    def remove(self):
+        apple = self.removeText.get("1.0", tk.END)
+        int(apple)
+        # cur.execute("SELECT * FROM wishlist WHERE id = ?", )
+        cur.execute("DELETE FROM wishlist WHERE id = ?",(apple,) )
            
 mainGUI()
 
